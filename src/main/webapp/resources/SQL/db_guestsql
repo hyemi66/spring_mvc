@@ -1,0 +1,19 @@
+create table tbl_guest(
+    gno int primary key,
+    gname varchar2(20) not null,
+    gtitle varchar2(200) not null,
+    gcont varchar2(4000) not null,
+    ghit int default 0,
+    gdate date default sysdate
+);
+
+select * from tbl_guest order by gno;
+
+CREATE SEQUENCE gno_seq2
+START WITH 1
+INCREMENT BY 1
+nocache;
+
+select gno_seq2.nextval from dual;
+
+select * from tbl_guest order by gno;

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Gongji">
+	
+	<!-- 공지 게시판 입력 -->
+	<insert id="gongji_in">
+		insert into tbl_gongji (gongji_no, gongji_name, gongji_title, gongji_cont, gongji_date)
+		values(gongji_no_seq.nextval, #{gongji_name}, #{gongji_title}, #{gongji_cont}, sysdate)
+	</insert>
+	
+	<!-- 공지 게시판 총 게시물 -->
+	<select id="gongji_total" resultType="int">
+		select count(*) from tbl_gongji
+	</select>
+	
+	<!-- 공지 게시판 목록 -->
+	<select id="gongji_list" resultType="gongji">
+		select * from tbl_gongji order by gongji_no desc
+	</select>
+	
+	<!-- 공지 게시판 내용 -->
+	<select id="gongji_view" resultType="gongji">
+		select * from tbl_gongji where gongji_no = #{gongji_no}
+	</select>
+	
+</mapper>

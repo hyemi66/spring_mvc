@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Guest">
+	<!-- 게스트 저장 -->
+	<insert id="guest_in" parameterType="com.naver.vo.GuestVO">
+		insert into tbl_guest(gno, gname, gtitle, gcont)
+		values(gno_seq2.nextval, #{gname}, #{gtitle}, #{gcont})
+	</insert>
+	
+	<!-- 총 게스트 수 -->
+	<select id="guest_count" resultType="int">
+		select count(*) from tbl_guest
+	</select>
+	
+	<!-- 게스트 목록 -->
+	<select id="guest_list" resultType="guest" parameterType="guest">
+		select * from
+		(select rowNum rNum, gno, gname, gtitle, ghit, gdate
+		from (select * from tbl_guest order by gno desc))
+		where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+	</select>
+</mapper>
